@@ -422,7 +422,13 @@ public class Vista extends javax.swing.JFrame {
 
     private void BotonIgualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonIgualActionPerformed
         // TODO add your handling code here:
-        
+        String s1=Respuesta.getText();
+        Respuesta.setText("");
+        try{
+            Respuesta.setText(""+Postfijo_1.resolverPostfijo(Postfijo_1.postfijo(s1)));
+        }catch(Exception e){
+            Respuesta.setText("Sintaxis inválida");
+        }
     }//GEN-LAST:event_BotonIgualActionPerformed
 
     private void Boton0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton0ActionPerformed

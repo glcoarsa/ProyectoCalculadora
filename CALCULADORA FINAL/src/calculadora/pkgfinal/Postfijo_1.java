@@ -21,7 +21,6 @@ public class Postfijo_1{
             switch (x.charAt(i)){
                 case '(':
                    pila.push(x.charAt(i));
-                    System.out.println(x.charAt(i)); //fjbergjhbhjgbehj
                    break;
                 case ')':
                    if(pila.isEmpty()){
@@ -30,7 +29,6 @@ public class Postfijo_1{
                    else{
                        pila.pop();
                    }
-                    System.out.println(x.charAt(i)); //fjbergjhbhjgbehj
                    break;
                 case '+':
                 case '*':
@@ -38,27 +36,31 @@ public class Postfijo_1{
                    if(i==0||i==x.length()-1||esOperador2(x.charAt(i+1))||esOperador3(x.charAt(i+1))||x.charAt(i-1)=='('||x.charAt(i-1)=='.'||x.charAt(i+1)==')'){
                        res=false;
                    }
-                    System.out.println(x.charAt(i)); //fjbergjhbhjgbehj
-                    System.out.println(x.charAt(i+1)); //fjbergjhbhjgbehj
                    break;
                 case'-':
-                   if(i>0 && (i==x.length()-1||esOperador2(x.charAt(i+1))||esOperador3(x.charAt(i+1))||x.charAt(i-1)=='.'||x.charAt(i+1)==')')){
+                   if(i>0 && (i==x.length()-1||esOperador2(x.charAt(i+1))||esOperador3(x.charAt(i+1))||esOperador3(x.charAt(i-1))||x.charAt(i-1)=='.'||x.charAt(i+1)==')')){
                        res=false;
                    }
-                    System.out.println(x.charAt(i)); //fjbergjhbhjgbehj
                    break;
                 case '/':
-                    if(i==0||i==x.length()-1||esOperador2(x.charAt(i+1))||esOperador3(x.charAt(i+1))||x.charAt(i-1)=='('||x.charAt(i-1)=='.'||x.charAt(i+1)==')' || (x.charAt(i+1)=='0' && i+2>=x.length()) || (x.charAt(i+1)=='0' && x.charAt(i+2)!='.')){
+                    if(i==0||i==x.length()-1||esOperador2(x.charAt(i+1))||x.charAt(i-1)=='('||x.charAt(i-1)=='.'||x.charAt(i+1)==')' || (x.charAt(i+1)=='0' && i+2>=x.length()) || (x.charAt(i+1)=='0' && x.charAt(i+2)!='.')){
                        res=false;
                    }
-                    System.out.println(x.charAt(i)); //fjbergjhbhjgbehj
-                    System.out.println(x.charAt(i+1)); //fjbergjhbhjgbehj
                    break;
                 case'.':
+                    int temp=i+1;
+                    while (res && temp<x.length() && !esOperador2(x.charAt(temp)) && !esOperador3(x.charAt(temp))){
+                        try{
+                            Integer.parseInt(String.valueOf(x.charAt(temp)));
+                        }catch(Exception e){
+                            if(x.charAt(temp)=='.')
+                            res=false;
+                        }
+                        temp++;
+                    }
                     if(i==x.length()-1||x.charAt(i+1)=='('||x.charAt(i+1)==')'||x.charAt(i+1)=='.'){
                        res=false;
                     }
-                    System.out.println(x.charAt(i)); //fjbergjhbhjgbehj
                     break;
             }
             i++;
@@ -131,10 +133,7 @@ public class Postfijo_1{
                         pila.pop();
                         i++;
                     } else {
-                        if (cadena.charAt(i) == '-' && (i == 0 || (cadena.charAt(i-1)== '('  )) && cadena.charAt(i+1)!='(') {
-                            //Si es un numero negativo, y es el primero (como si fuera un: -2+3)
-                            // o si está despues de un signo de operacion o paréntesis izquierdo 
-                            //y que no esté despues de un paréntesis derecho, se va a hacer '¬' como en lógica
+                        if (cadena.charAt(i) == '-' && (i == 0 || (cadena.charAt(i-1)== '('  )) && cadena.charAt(i+1)!='(' || cadena.charAt(i-1)=='/' || cadena.charAt(i-1)=='*') {
                             signo = false;
                             i++;
                         }
@@ -166,9 +165,6 @@ public class Postfijo_1{
         while(i<lista1.size()){
             if(lista1.get(i) instanceof Double){
                 pila.push(lista1.get(i));
-                //System.out.println(pila.peek()); ///fguhegfhjebgjhefbg
-                                                        //System.out.println(pila.toString());
-
                 i++;
             }
             else{
@@ -177,25 +173,16 @@ public class Postfijo_1{
                         i1=(double)pila.pop();
                         i2=(double)pila.pop();
                         pila.push(i2+i1);
-                                       // System.out.println(pila.peek()); ///fguhegfhjebgjhefbg
-                                       // System.out.println(pila.toString());
-
                         i++;
                         break;
                     case '-':
                         i2=(double)pila.pop();
                         if(pila.isEmpty()){
                             pila.push(i2*-1);
-                                        //    System.out.println(pila.peek()); ///fguhegfhjebgjhefbg
-                                        //System.out.println(pila.toString());
-
                         }
                         else{
                             i1=(double)pila.pop();
                             pila.push(i1-i2);
-                                         //   System.out.println(pila.peek()); ///fguhegfhjebgjhefbg
-                                        //System.out.println(pila.toString());
-
                         }
                         i++;
                         break;
@@ -203,27 +190,18 @@ public class Postfijo_1{
                         i1=(double)pila.pop();
                         i2=(double)pila.pop();
                         pila.push(i2*i1);
-                                        //System.out.println(pila.peek()); ///fguhegfhjebgjhefbg
-                                        //System.out.println(pila.toString());
-
                         i++;
                         break;
                     case '/':
                         i1=(double)pila.pop();
                         i2=(double)pila.pop();
                         pila.push(i2/i1);
-                                       // System.out.println(pila.peek()); ///fguhegfhjebgjhefbg
-                                       // System.out.println(pila.toString());
-
                         i++;
                         break;
                     case '^':
                         i1=(double)pila.pop();
                         i2=(double)pila.pop();
                         pila.push((Math.pow(i2, i1)));
-                                        //System.out.println(pila.pop()); ///fguhegfhjebgjhefbg
-                                       // System.out.println(pila.toString());
-
                         i++;
                         break;
                 }
@@ -232,35 +210,5 @@ public class Postfijo_1{
         
         return (double)pila.pop();
     }
-    
-    public static void main(String[] args) {
-        String s1= "17.34^2-5*3-(1+.5)^2";
-        ArrayList lista1=new ArrayList();
-        ArrayList lista2=postfijo(s1);
-        lista1.add(6.0);
-        lista1.add(2.0);
-        lista1.add('+');
-        lista1.add(3.0);
-        lista1.add('*');
-        lista1.add(2.0);
-        lista1.add(2.0);
-        lista1.add('^');
-        lista1.add('/');
-        lista1.add(4.0);
-        lista1.add('-');
-        
-        
-        //System.out.println(revisarSintaxis(s1));
-        //System.out.println(revisarSintaxis2(s1));
-        System.out.println(postfijo(s1));
-        
-        //for(int i=0;i<lista2.size();i++){
-       //     System.out.println(lista2.get(i).getClass());
-        //}
-        
-        System.out.println(resolverPostfijo(lista2));
-        
-    }
-    
     
 }
