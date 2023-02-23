@@ -18,9 +18,16 @@ public class Postfijo_1{
         int i=0;
         
         while(res && i<x.length()){
+                    System.out.println(x.charAt(i));
+                    System.out.println(i);
             switch (x.charAt(i)){
                 case '(':
-                   pila.push(x.charAt(i));
+                    if(i>0 && (!esOperador2(x.charAt(i-1))) && i>0 && (!esOperador3(x.charAt(i-1))) ){
+                       res=false;
+                    }
+                    else{
+                       pila.push(x.charAt(i));
+                    }
                    break;
                 case ')':
                    if(pila.isEmpty()){
@@ -79,7 +86,7 @@ public class Postfijo_1{
         return c=='-';
     }
     
-        public static int jerarquia (char signo) {
+    public static int jerarquia (char signo) {
         if (signo == '+' || signo == '-') {
             return 1;
         } else {
