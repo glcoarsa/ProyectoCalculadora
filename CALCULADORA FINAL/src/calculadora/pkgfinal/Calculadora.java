@@ -7,11 +7,47 @@ package calculadora.pkgfinal;
 import java.util.ArrayList;
 
 /**
- *
- * @author vic
+ * <pre>
+ * Clase Calculadora 
+ * 
+ * Contiene los métodos necesarios para poder hacer calculos de una expresión dada, por ejemplo: 
+ * </pre>
+ *  <ul>
+ *      <li>Revisar si la sintaxis de la expresión es correcta</li> 
+ *      <li>Saber si un signo es un operador</li> 
+ *      <li>Saber la jerarquía de cada signo (operador)</li> 
+ *      <li>Pasar la expresión de infijo a postfijo</li> 
+ *      <li>Y finalmente resolver el postfijo o la expresión dada</li> 
+ *  </ul>
+ * 
+ * @author Gabiela López Coarasa
+ * @author Victor Hugo Esperanza Díaz 
+ * @author Braulio Alejandro Lozano Cuevas  
+ * @author María del Carmen Suárez Flores
+ * @author Eduardo Turriza Fortoul
  */
-public class Postfijo_1{
+public class Calculadora{
     
+    /**
+     * <pre>
+     * Método revisarSintaxis
+     * 
+     * Este método revisa si la expresión dada esté bien 
+     * escrita o no.
+     * 
+     * Revisa que los paréntesis estén bien balanceados 
+     * y que los operadores estén bien puestos.
+     * 
+     * </pre>
+     * @param x Que es la expresión que va a recibir la calculadora.
+     * @see esOperador2
+     * @see esOperador3
+     * @return <ul> 
+     *          <li>true: Si es que el usuario dio correctamente 
+     *              la expresión </li> 
+     *          <li>false: si es hay un problema con la sintaxis  </li> 
+     *         </ul> 
+     */
     public static boolean revisarSintaxis2(String x){
         PilaADT pila=new PilaA();
         boolean res=true;
@@ -20,7 +56,12 @@ public class Postfijo_1{
         while(res && i<x.length()){
             switch (x.charAt(i)){
                 case '(':
-                   pila.push(x.charAt(i));
+                    if(i>0 && (!esOperador2(x.charAt(i-1))) && i>0 && (!esOperador3(x.charAt(i-1))) && i>0 && (x.charAt(i-1)!='(')){
+                       res=false;
+                    }
+                    else{
+                       pila.push(x.charAt(i));
+                    }
                    break;
                 case ')':
                    if(pila.isEmpty()){
@@ -71,15 +112,53 @@ public class Postfijo_1{
         return res;
     }
     
+    /**
+     * <pre>
+     * Método esOperador2
+     * 
+     * El programa revisa si lo que está leyendo es un operador
+     * </pre>
+     * @param c Que es el operador que lee en la expresion
+     * @return <ul> 
+     *          <li>true: Si es que es uno de los operadores de '+', '*', '/' y '^'. </li> 
+     *          <li>false: si no es un operador de los de arriba. </li> 
+     *         </ul> 
+     */
     private static boolean esOperador2(char c){
         return c=='+'||c=='*'||c=='/'||c=='^';
     }
     
+    /**
+     * Método esOperador3
+     * 
+     * @param c Que es el operador que lee en la expresion
+     * @return <ul> 
+     *          <li>true: Si es que es un operador de '-'.</li> 
+     *          <li>false: si no es un '-'. </li> 
+     *         </ul> 
+     */
     private static boolean esOperador3(char c){
         return c=='-';
     }
     
-        public static int jerarquia (char signo) {
+    /**
+     * <pre>
+     * Método Jerarquía
+     * 
+     * El método lee los operadores que se le dan y les da la jerarquía correspondiente
+     * a cada uno para que se resuelvan de manera correcta.
+     * </pre>
+     * 
+     * @param signo Que es el operador que lee en la expresion y da la jerarquía.
+     * @return int <ul> 
+     *          <li>1: Si es que es un operador de '+' o '-'.</li> 
+     *          <li>2: Si es que es un operador de '*' o '/'.</li> 
+     *          <li>3: Si es que es un operador de '^'.</li> 
+     *          <li>-1: Si es que es otro operador.</li> 
+     *         </ul> 
+     */
+
+    public static int jerarquia (char signo) {
         if (signo == '+' || signo == '-') {
             return 1;
         } else {
@@ -95,7 +174,16 @@ public class Postfijo_1{
         }
     }
     
-    
+    /**
+    * Método postfijo
+    *
+    * El método convierte la expresión dada en infijo a postfijo
+    * @see ExcepcionColeccionVacia
+    * @see revisarSintaxis
+    * @param cadena que es la expresión pero en caracteres y regresa
+    * @return un arreglo con los caracteres en un ArrayList
+    *
+    */ 
     public static ArrayList postfijo (String cadena) {
         ArrayList  expresion = new ArrayList ();
         PilaA pila= new PilaA();
@@ -157,6 +245,18 @@ public class Postfijo_1{
         return expresion;
     }
     
+    /**
+     * Método resolverPostfijo     
+     *  Este método resolverá la operación que le sea otorgada en notación postfija.
+     * @param lista1 El método necesita recibir una lista acomodada en notación postfija para poder funcionar.
+     *  <ul>
+     * <li>Se recibirá una lista conteniendo la operación en notación postfija.</li>
+     * <li>Con ayuda de un while se recorre la lista en búsqueda de un número o un carácter. </li>
+     * <li> En caso de ser un número se guardará directamente en la pila, de lo contrario la operación correspondiente será resuelta.</li>
+     * </ul>
+     * @return El método regresa el resultado de la operación.
+     */
+
     public static double resolverPostfijo(ArrayList lista1){
         PilaADT pila= new PilaA();
         int i=0;

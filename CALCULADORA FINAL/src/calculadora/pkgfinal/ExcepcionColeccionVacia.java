@@ -5,14 +5,30 @@
 package calculadora.pkgfinal;
 
 /**
+ * <pre>
+ * Clase ExcepcionColeccionVacia
+ * 
+ * Sirve para mandar una excepción de casos específicos donde el cógido no funciona
+ * </pre> 
  *
- * @author vic
+ * @author Gabiela López Coarasa
+ * @author Victor Hugo Esperanza Díaz 
+ * @author Braulio Alejandro Lozano Cuevas  
+ * @author María del Carmen Suárez Flores
+ * @author Eduardo Turriza Fortoul
  */
 public class ExcepcionColeccionVacia extends RuntimeException{
+
+     /**
+     * Constructor vacío de ExcepcionColeccionVacia
+     */
 
     public ExcepcionColeccionVacia() {
     }
 
+    /**
+     * Constructor de ExcepcionColeccionVacia
+     */
     public ExcepcionColeccionVacia(String message) {
         super(message);
     }
