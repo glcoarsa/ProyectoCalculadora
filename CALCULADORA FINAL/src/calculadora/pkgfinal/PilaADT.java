@@ -5,8 +5,17 @@
 package calculadora.pkgfinal;
 
 /**
- *
- * @author vic
+ * <pre>
+ * Interface PilaADT
+ * 
+ * Determina el comportamiento y los métodos que serán utilizados por las clases hijas. 
+ * </pre>
+ * @author Gabiela López Coarasa
+ * @author Victor Hugo Esperanza Díaz 
+ * @author Braulio Alejandro Lozano Cuevas  
+ * @author María del Carmen Suárez Flores
+ * @author Eduardo Turriza Fortoul
+ 
  */
 public interface PilaADT <T> {
     

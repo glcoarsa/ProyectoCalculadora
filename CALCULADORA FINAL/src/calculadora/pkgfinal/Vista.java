@@ -8,8 +8,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- *
- * @author vic
+ * <pre>
+ * Clase Vista 
+ * 
+ * Es la interfaz gráfica de la calculadora con todos los métodos necesarios implementados 
+ * </pre>
+ * 
+ * @author Gabiela López Coarasa
+ * @author Victor Hugo Esperanza Díaz 
+ * @author Braulio Alejandro Lozano Cuevas  
+ * @author María del Carmen Suárez Flores
+ * @author Eduardo Turriza Fortoul
  */
 public class Vista extends javax.swing.JFrame {
 
@@ -425,7 +434,7 @@ public class Vista extends javax.swing.JFrame {
         String s1=Respuesta.getText();
         Respuesta.setText("");
         try{
-            Respuesta.setText(""+Postfijo_1.resolverPostfijo(Postfijo_1.postfijo(s1)));
+            Respuesta.setText(""+Calculadora.resolverPostfijo(Calculadora.postfijo(s1)));
         }catch(Exception e){
             Respuesta.setText("Sintaxis inválida");
         }
