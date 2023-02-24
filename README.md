@@ -5,9 +5,10 @@ En este repositorio se incluyen los siguientes códigos vistos en clase:
 * ExcepcionColeccionVacia.java
 
 Y los siguientes códigos desarrollados por el equipo:
-* PostFijo_1.java
+* Calculadora.java
 * Vista.form
 * Vista.java
+* Pruebas.java
 
 El lenguaje utilizado en este proyecto es 100% java
 
